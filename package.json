@@ -3,9 +3,9 @@
   "version": "0.1.1",
   "description": "Turns a stack trace into code.",
   "scripts": {
-    "prepublishOnly": "npm test && npm run build",
+    "prepublishOnly": "npm run build && npm test",
     "build": "babel src/ -d lib/",
-    "test": "echo \"There are no tests yet! :(\" && exit 0"
+    "test": "npm run build && exit 1"
   },
   "main": "lib/index.js",
   "repository": "git@github.com:Timer/stacktrace-resolve.git",

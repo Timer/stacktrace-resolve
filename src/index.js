@@ -29,7 +29,7 @@ async function awaitAll(promises) {
   }
 }
 
-function getLinesAround(line, count, lines) {
+function getLinesAround(line, count, lines = []) {
   if (typeof lines === 'string') lines = lines.split('\n')
   const result = []
   for (let index = Math.max(0, line - 1 - count); index <= Math.min(lines.length - 1, line - 1 + count); ++index) {
@@ -90,6 +90,7 @@ async function resolve(error, context = 3) {
 
     if (!files.hasOwnProperty(fileName)) continue
     const script = files[fileName]
+    if (script == null) continue
     const oScriptArr = getLinesAround(line, context, script)
     resolved[index] = new ResolvedStackFrame(functionName, fileName, line, column, oScriptArr)
 
