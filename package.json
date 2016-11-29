@@ -1,6 +1,6 @@
 {
   "name": "stacktrace-resolve",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Turns a stack trace into code.",
   "scripts": {
     "prepublish": "npm test && npm run build",
