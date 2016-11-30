@@ -67,7 +67,7 @@ async function resolve(error, context = 3) {
   for (const file of fileList) {
     requests.push(fetch(file).then(res => res.text()).then(text => {
       files[file] = text
-    }))
+    }).catch(e => { }))
   }
 
   await awaitAll(requests)
@@ -77,7 +77,7 @@ async function resolve(error, context = 3) {
   for (const file of fileList) {
     requests.push(getSourceMap(file, files[file]).then(map => {
       sourcemaps[file] = map
-    }))
+    }).catch(e => { }))
   }
 
   await awaitAll(requests)
