@@ -43,13 +43,26 @@ function getLinesAround(line, count, lines = []) {
 }
 
 async function getSourceMap(file, contents) {
-  const match = /\/\/[#@] ?sourceMappingURL=([^\s'"]+)\s*$/.exec(contents)
+  const match = /\/\/[#@] ?sourceMappingURL=([^\s'"]+)\s*$/m.exec(contents)
   if (!(match && match[1])) throw new Error(`Source map not found for file: ${file}`)
 
-  const index = file.lastIndexOf('/')
-  const url = file.substring(0, index + 1) + match[1]
-  const obj = await fetch(url).then(res => res.json())
-  return new SourceMapConsumer(obj)
+  let sm = match[1].toString()
+  if (sm.indexOf('data:') === 0) {
+    const base64 = /^data:application\/json;([\w=:"-]+;)*base64,/
+    const match2 = sm.match(base64)
+    if (!match2) {
+      throw new Error('Sorry, we do not support this inline source-map encoding.')
+    }
+    sm = sm.substring(match2[0].length)
+    sm = window.atob(sm)
+    sm = JSON.parse(sm)
+    return new SourceMapConsumer(sm)
+  } else {
+    const index = file.lastIndexOf('/')
+    const url = file.substring(0, index + 1) + sm
+    const obj = await fetch(url).then(res => res.json())
+    return new SourceMapConsumer(obj)
+  }
 }
 
 async function resolve(error, context = 3) {
