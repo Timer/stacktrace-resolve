@@ -15,6 +15,9 @@ module.exports = function(config) {
       extensions: ['.js'],
       transform: [require('browserify-istanbul')]
     },
+    coverageReporter: {
+      type: 'lcov'
+    },
     reporters: ['progress', 'coverage'],
     port: 9876,
     colors: true,
