@@ -128,4 +128,4 @@ async function resolve(error, context = 3) {
 
 export default resolve
 
-export { ResolvedStackFrame }
+export { resolve, ResolvedStackFrame }
