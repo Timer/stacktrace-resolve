@@ -109,6 +109,7 @@ async function resolve(error, context = 3) {
 
     if (!sourcemaps.hasOwnProperty(fileName)) continue
     const { [fileName]: map } = sourcemaps
+    if (map == null) continue
     const original = map.originalPositionFor({ line, column })
     const { source: sourceFile, line: sourceLine, column: sourceColumn } = original
     if (!sourceFile || !line) continue
