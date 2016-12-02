@@ -12,9 +12,10 @@ module.exports = function(config) {
     },
     browserify: {
       debug: true,
-      extensions: ['.js']
+      extensions: ['.js'],
+      transform: [require('browserify-istanbul')]
     },
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
