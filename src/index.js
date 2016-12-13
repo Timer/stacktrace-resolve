@@ -78,9 +78,11 @@ async function resolve(error, context = 3) {
   const fileList = Object.keys(files)
   let requests = []
   for (const file of fileList) {
-    requests.push(fetch(file).then(res => res.text()).then(text => {
-      files[file] = text
-    }).catch(e => { }))
+    try {
+      requests.push(fetch(file).then(res => res.text()).then(text => {
+        files[file] = text
+      }).catch(e => { }))
+    } catch (e) { }
   }
 
   await awaitAll(requests)
