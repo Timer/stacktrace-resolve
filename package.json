@@ -1,6 +1,6 @@
 {
   "name": "stacktrace-resolve",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Turns a stack trace into code.",
   "repository": "git@github.com:Timer/stacktrace-resolve.git",
   "author": "Joe Haddad <timer150@gmail.com>",
